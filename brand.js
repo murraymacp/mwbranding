@@ -494,6 +494,61 @@ function cover({ logoBuffer, title, subtitle, clientName, siteAddress, details, 
   ];
 }
 
+/* ------------------------------------------------------ company identity */
+
+/**
+ * The statutory disclosure line for the page footer.
+ *
+ * Deliberately short. The Companies Act 2006 trading disclosure rules require
+ * the registered name, the part of the UK in which the company is registered,
+ * the registered number and the registered office on business letters and
+ * order forms. That is what goes here, plus the VAT number. The scheme
+ * registrations are not statutory and would triple the footer, so they live
+ * in registrationsBlock() at the end of the document instead.
+ */
+function footerRegistration() {
+  const co = T.company;
+  if (!co) return null;
+  return `${co.registeredName} Registered in ${co.jurisdiction} no. ${co.companyNumber}. `
+    + `Registered Office: ${co.registeredOffice}. VAT no. ${co.vat}`;
+}
+
+/**
+ * Full registration and accreditation numbers, for the end of a document.
+ *
+ * Set at caption size in muted grey: this is reference material a reader
+ * consults rather than reads, and it should not compete with the content.
+ */
+function registrationsBlock(o = {}) {
+  const co = T.company;
+  if (!co) return [];
+
+  const line = (text, bold = false) => new Paragraph({
+    alignment: AlignmentType.CENTER,
+    spacing: { after: 40 },
+    children: [run(text, { size: T.type.sizes.caption, color: C.textMuted, bold })],
+  });
+
+  const out = [];
+  if (o.rule !== false) {
+    out.push(new Paragraph({
+      spacing: { before: 200, after: 160 },
+      border: { top: { style: BorderStyle.SINGLE, size: 4, color: C.tintMid, space: 8 } },
+      children: [],
+    }));
+  }
+  out.push(line(co.registeredName, true));
+  out.push(line(`Registered in ${co.jurisdiction} no. ${co.companyNumber}  |  Registered Office: ${co.registeredOffice}`));
+  out.push(line(`VAT Registration: ${co.vat}  |  EORI: ${co.eori}  |  DUNS Number: ${co.duns}`));
+  // Chunk the scheme list rather than letting it wrap, which would otherwise
+  // break mid-value (an OZEV code split across two lines is unreadable).
+  const schemes = co.schemes.map((s) => `${s.label}: ${s.value}`);
+  for (let i = 0; i < schemes.length; i += 3) {
+    out.push(line(schemes.slice(i, i + 3).join('  |  ')));
+  }
+  return out;
+}
+
 /* --------------------------------------------------------- page furniture */
 
 function header(logoBuffer, { documentTitle, clientName }) {
@@ -536,7 +591,8 @@ function header(logoBuffer, { documentTitle, clientName }) {
   });
 }
 
-function footer({ confidentiality, documentRef, issueDate, registrationLine }) {
+function footer({ confidentiality, documentRef, issueDate }) {
+  const registrationLine = footerRegistration();
   const kids = [
     new Paragraph({
       alignment: AlignmentType.CENTER,
@@ -555,7 +611,7 @@ function footer({ confidentiality, documentRef, issueDate, registrationLine }) {
     kids.push(new Paragraph({
       alignment: AlignmentType.CENTER,
       spacing: { before: 40, after: 0 },
-      children: [run(registrationLine, { size: T.type.sizes.small, color: C.textMuted })],
+      children: [run(registrationLine, { size: T.type.sizes.caption, color: C.textMuted })],
     }));
   }
   return new Footer({ children: kids });
@@ -613,6 +669,7 @@ module.exports = {
   tokens: T, colour: C, page: PAGE,
   asset, logo, fetchAsset, trimToArtwork,
   loadAccreditations, accreditations, credentials,
+  footerRegistration, registrationsBlock,
   run, body, h1, h2, h3, bullets, callout,
   paramTable, matrixTable, cover, header, footer, docShell, write,
 };

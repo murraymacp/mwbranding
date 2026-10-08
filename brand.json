@@ -61,6 +61,24 @@
     }
   },
 
+  "company": {
+    "registeredName": "Munro Wilson Ltd.",
+    "jurisdiction": "England & Wales",
+    "jurisdictionNote": "Required on business letters and order forms by the Companies Act 2006 trading disclosure rules, alongside the registered number and registered office. It was absent from the registration block as supplied.",
+    "companyNumber": "08453439",
+    "registeredOffice": "Castlehills, Castle Terrace, Berwick-upon-Tweed, TD15 1PB",
+    "vat": "162 0474 32",
+    "eori": "GB162047432000",
+    "duns": "21-932-1904",
+    "schemes": [
+      { "label": "NICEIC Registration", "value": "614310000" },
+      { "label": "Approved Body Registration", "value": "NIC1-CB-6690" },
+      { "label": "MCS Registration", "value": "NIC-5995" },
+      { "label": "OZEV Authorisation", "value": "EVHS193 and WCS193" },
+      { "label": "RECC Registration", "value": "00068052" }
+    ]
+  },
+
   "colour": {
     "navy": "1F5C8B",
     "navyNote": "Primary brand navy. Section bands, headings, table header fill.",
@@ -112,8 +130,7 @@
     "headerLeft": "MUNRO WILSON LIMITED  |  {{DOCUMENT_TITLE}}  |  {{CLIENT_NAME}}",
     "headerLogoWidthPt": 90,
     "footerCentre": "{{CONFIDENTIALITY}}  |  Ref: {{DOCUMENT_REF}}  |  Issue: {{ISSUE_DATE}}  |  Page N of M",
-    "registrationLine": "{{REGISTRATION_LINE}}",
-    "registrationLineNote": "NOT SUPPLIED. Company number, VAT number, NICEIC and MCS registration numbers as worded on invoices."
+    "registrationLineNote": "Built from the company block rather than stored as text, so a change there propagates. The per-page footer carries only the statutory minimum; the full scheme list goes in the end-of-document registrations block."
   },
 
   "components": [
@@ -137,6 +154,8 @@
     "MCS and NICEIC marks are black-on-transparent with no white variant supplied, so the badge strip can only sit on a white or pale background. Only B-Corp has a reversed variant.",
     "niceic_app_contractor.png carries roughly 40 percent transparent padding on a square canvas. The build trims to the alpha bounding box at run time, but a pre-trimmed file in the repo would be cleaner.",
     "image-808x1024.png should be renamed mcs-certified-black.png in the repo.",
+    "The registration block as supplied omitted the part of the UK in which the company is registered, which the Companies Act 2006 trading disclosure rules require on business letters and order forms. England & Wales has been added, inferred from the company number series and the Berwick-upon-Tweed registered office. Confirm against the Companies House record.",
+    "Registered name is held as 'Munro Wilson Ltd.' but document body copy says 'Munro Wilson Limited'. Trading disclosures require the registered name as registered. Confirm which form Companies House holds and align both.",
     "These source files are not in the brand repo. They were lost once already when the build environment reset. Commit brand.json, brand.js and the build scripts alongside the assets.",
     "Stored quote convention describes a full-bleed two-panel navy/white cover. The source document uses a centred logo with navy title bands. The template follows the source document. Confirm which is the house standard.",
     "Quote convention requires each numbered section to start on a new page. NOT yet implemented in these components; see pageBreakBeforeSections in build options."

@@ -18,7 +18,6 @@ const META = {
   confidentiality: '{{CONFIDENTIALITY}}',
   documentRef: '{{DOCUMENT_REF}}',
   issueDate: '{{ISSUE_DATE}}',
-  registrationLine: '{{REGISTRATION_LINE}}',
 };
 
 (async () => {
@@ -218,6 +217,7 @@ const META = {
   push(gap(300));
   push(B.body('This document is submitted by Munro Wilson Limited in confidence and constitutes the {{SUBMISSION_TYPE}} to {{SUBMITTED_TO}} for {{SCOPE_SUMMARY}} at {{SITE_NAME}}. Valid for {{VALIDITY_PERIOD}} from {{ISSUE_DATE}}.',
     { italics: true, align: AlignmentType.CENTER }));
+  push(...B.registrationsBlock());
 
   const doc = new Document(B.docShell({ children: kids, logoBuffer, meta: META }));
   const out = await B.write(doc, __dirname + '/MW-Document-Template.docx');

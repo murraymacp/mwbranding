@@ -62,6 +62,21 @@ document.
 | `short` | Two sentences plus marks | Proposals to warm contacts |
 | `full` | Capability statement, accreditations, track record | Tenders, prequalification, first approaches |
 
+## Company identity
+
+All registration numbers live in the `company` block of `brand.json` and are
+never typed into a document. Two components consume them:
+
+- `footerRegistration()` builds the per-page footer line, carrying only the
+  statutory minimum: registered name, part of the UK, registered number,
+  registered office, VAT number.
+- `registrationsBlock()` renders the full scheme list for the end of a
+  document: NICEIC, Approved Body, MCS, OZEV, RECC, plus EORI and DUNS.
+
+The split is deliberate. The Companies Act 2006 trading disclosure rules
+cover the first set only; putting all eleven numbers in a footer would cost
+roughly an eighth of every page to reference nobody reads in place.
+
 ## Rules
 
 1. Take assets from here, never from an older document or the website.
@@ -74,7 +89,9 @@ document.
 - No reversed Munro Wilson wordmark. Grey `#A7A9AC` on navy `#1F5C8B` measures
   3.01:1, so the logo cannot currently sit on a navy panel.
 - No reversed NICEIC or MCS marks, so the badge strip is white-background only.
-- `{{REGISTRATION_LINE}}` is unset: the footer needs the company number, VAT
+- Confirm the registered company name against the Companies House record: `brand.json`
+  holds "Munro Wilson Ltd." but body copy says "Munro Wilson Limited". Trading
+  disclosures require the name as registered.
   number and scheme registration numbers as worded on invoices.
 - Quote convention requires each numbered section to start on a new page. The
   `h1()` component supports `pageBreakBefore` but the builds do not yet set it.

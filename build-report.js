@@ -20,7 +20,6 @@ const META = {
   confidentiality: 'Internal',
   documentRef: 'MW-BRAND-001',
   issueDate: '8 October 2026',
-  registrationLine: '{{REGISTRATION_LINE}}',
 };
 
 (async () => {
@@ -142,6 +141,7 @@ const META = {
     { italics: true, align: AlignmentType.CENTER }));
   push(gap(240));
   push(...B.credentials('strip', badges, { heightPt: 28 }));
+  push(...B.registrationsBlock());
 
   const doc = new Document(B.docShell({ children: kids, logoBuffer, meta: META }));
   const out = await B.write(doc, __dirname + '/MW-Brand-Identity-Report.docx');
