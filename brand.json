@@ -1,0 +1,144 @@
+{
+  "_meta": {
+    "name": "Munro Wilson Limited brand specification",
+    "version": "1.1.0",
+    "updated": "2026-10-08",
+    "derivedFrom": "Colour and type values sampled from Munro Wilson - PV Scope - SC52A v4.docx; logo colours sampled from MunroWFinal.png artwork.",
+    "assetRepo": "https://github.com/murraymacp/mwbranding",
+    "branch": "main"
+  },
+
+  "assets": {
+    "raw": "https://raw.githubusercontent.com/murraymacp/mwbranding/main/",
+
+    "logoPrimary": {
+      "file": "MunroWFinal.png",
+      "note": "1768x418 RGBA, true alpha. Grey wordmark, blue mark. White and pale backgrounds ONLY.",
+      "trim": false
+    },
+    "logoReversed": {
+      "file": null,
+      "note": "NOT SUPPLIED. Needed for any dark or navy background. See _issues."
+    },
+    "favicon": {
+      "file": "MunroW - favicon.jpg",
+      "note": "Web favicon only. Unusable in documents. Filename contains a space."
+    },
+
+    "accreditations": [
+      {
+        "key": "niceic",
+        "file": "niceic_app_contractor.png",
+        "label": "NICEIC Approved Contractor",
+        "trim": true,
+        "scale": 1.0,
+        "note": "1080x1080 canvas, artwork occupies only 848x490 of it. Must be trimmed to the alpha bounding box or it renders tiny beside the others."
+      },
+      {
+        "key": "mcs",
+        "file": "image-808x1024.png",
+        "label": "MCS Certified",
+        "trim": true,
+        "scale": 1.0,
+        "note": "MCS Certified mark, black on transparent. Filename is a CMS export artifact; rename to mcs-certified-black.png in the repo and update this entry."
+      },
+      {
+        "key": "bcorp",
+        "file": "B-Corp-Logo-Black-RGB.png",
+        "fileReversed": "B-Corp-Logo-White-RGB.png",
+        "label": "Certified B Corporation",
+        "trim": true,
+        "scale": 0.92,
+        "note": "Tall narrow mark. Scaled slightly down so it does not dominate the strip at equal height. White variant available for dark backgrounds."
+      }
+    ],
+
+    "badgeStrip": {
+      "heightPt": 40,
+      "gapPt": 22,
+      "caption": "NICEIC Approved Contractor  |  MCS Certified  |  Certified B Corporation",
+      "captionEnabled": false
+    }
+  },
+
+  "colour": {
+    "navy": "1F5C8B",
+    "navyNote": "Primary brand navy. Section bands, headings, table header fill.",
+    "navyDeep": "264B75",
+    "navyDarkest": "083863",
+    "accentBlue": "0F75BC",
+    "accentBlueLight": "4983C4",
+    "tintPale": "EBF3FA",
+    "tintPaleNote": "Callout boxes and alternating table fill.",
+    "tintMid": "D6E4F0",
+    "tintFaint": "F2F7FC",
+    "wordmarkGrey": "A7A9AC",
+    "textBody": "1A1A1A",
+    "textMuted": "555555",
+    "white": "FFFFFF",
+    "rule": "1F5C8B"
+  },
+
+  "type": {
+    "family": "Arial",
+    "familyFallback": "Helvetica, sans-serif",
+    "sizes": {
+      "coverTitle": 24,
+      "coverSubtitle": 12,
+      "clientName": 13,
+      "clientAddress": 10,
+      "h1": 13,
+      "h2": 11,
+      "h3": 10,
+      "body": 9.5,
+      "tableBody": 9,
+      "small": 8.5,
+      "caption": 7.5
+    },
+    "sizesNote": "Points. docx-js takes half-points, so multiply by 2."
+  },
+
+  "page": {
+    "size": "A4",
+    "widthDxa": 11906,
+    "heightDxa": 16838,
+    "marginDxa": 900,
+    "headerDxa": 708,
+    "footerDxa": 708,
+    "contentWidthDxa": 10106
+  },
+
+  "furniture": {
+    "headerLeft": "MUNRO WILSON LIMITED  |  {{DOCUMENT_TITLE}}  |  {{CLIENT_NAME}}",
+    "headerLogoWidthPt": 90,
+    "footerCentre": "{{CONFIDENTIALITY}}  |  Ref: {{DOCUMENT_REF}}  |  Issue: {{ISSUE_DATE}}  |  Page N of M",
+    "registrationLine": "{{REGISTRATION_LINE}}",
+    "registrationLineNote": "NOT SUPPLIED. Company number, VAT number, NICEIC and MCS registration numbers as worded on invoices."
+  },
+
+  "components": [
+    "coverPage",
+    "accreditations (badge strip)",
+    "credentials (none / strip / short / full)",
+    "sectionBand (h1)",
+    "subHeading (h2)",
+    "minorHeading (h3)",
+    "body",
+    "bullets",
+    "callout",
+    "paramTable (2 col)",
+    "matrixTable (n col)",
+    "standardsList"
+  ],
+
+  "_issues": [
+    "Grey wordmark #A7A9AC on navy #1F5C8B gives 3.01:1 contrast, below the 4.5:1 readability threshold. A reversed white-wordmark logo is required before the Munro Wilson logo can sit on a navy panel.",
+    "The source document embeds the logo as a JPEG with the alpha flattened to black, then relies on Word's Set Transparent Color (a:clrChange) to knock the black out. Fragile. The template uses the true RGBA PNG instead.",
+    "MCS and NICEIC marks are black-on-transparent with no white variant supplied, so the badge strip can only sit on a white or pale background. Only B-Corp has a reversed variant.",
+    "niceic_app_contractor.png carries roughly 40 percent transparent padding on a square canvas. The build trims to the alpha bounding box at run time, but a pre-trimmed file in the repo would be cleaner.",
+    "image-808x1024.png should be renamed mcs-certified-black.png in the repo.",
+    "These source files are not in the brand repo. They were lost once already when the build environment reset. Commit brand.json, brand.js and the build scripts alongside the assets.",
+    "Stored quote convention describes a full-bleed two-panel navy/white cover. The source document uses a centred logo with navy title bands. The template follows the source document. Confirm which is the house standard.",
+    "Quote convention requires each numbered section to start on a new page. NOT yet implemented in these components; see pageBreakBeforeSections in build options."
+  ]
+}
