@@ -2,3 +2,5 @@ node_modules/
 *.pdf
 *.jpg
 MW-*.docx
+out/
+letters/
