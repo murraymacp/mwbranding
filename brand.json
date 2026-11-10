@@ -1,8 +1,8 @@
 {
   "_meta": {
     "name": "Munro Wilson Limited brand specification",
-    "version": "1.1.0",
-    "updated": "2026-10-08",
+    "version": "1.2.0",
+    "updated": "2026-11-10",
     "derivedFrom": "Colour and type values sampled from Munro Wilson - PV Scope - SC52A v4.docx; logo colours sampled from MunroWFinal.png artwork.",
     "assetRepo": "https://github.com/murraymacp/mwbranding",
     "branch": "main"
@@ -124,6 +124,33 @@
     "headerDxa": 708,
     "footerDxa": 708,
     "contentWidthDxa": 10106
+  },
+
+  "contact": {
+    "services": "Solar PV  |  Battery Storage  |  EV Charging  |  Heat Pumps",
+    "tradingBase": "Duns, Scottish Borders",
+    "tradingAddress": null,
+    "phone": null,
+    "email": null,
+    "web": "www.munrowilson.co.uk",
+    "note": "Shown top right of the letterhead, in this order. Any null field is omitted. tradingAddress (array of lines) replaces tradingBase when set."
+  },
+
+  "letter": {
+    "marginTopDxa": 2381,
+    "marginBottomDxa": 2041,
+    "marginSideDxa": 1134,
+    "headerDxa": 567,
+    "footerDxa": 454,
+    "bodyPt": 10.5,
+    "lineSpacing": 276,
+    "paragraphAfter": 180,
+    "logoWidthPx": 220,
+    "continuationLogoWidthPx": 90,
+    "badgeHeightPx": 30,
+    "badgeGapPt": 24,
+    "signatureGapPt": 42,
+    "note": "Single page letter layout. 20mm side margins rather than the 15.9mm document margin, because a 10.5pt letter line across the full document width runs past 110 characters. First page carries the full letterhead; any continuation page gets a compact header. Image sizes are in px because docx-js ImageRun transformation takes pixels at 96 dpi (220px = 58mm)."
   },
 
   "furniture": {

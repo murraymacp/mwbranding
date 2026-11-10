@@ -1,0 +1,25 @@
+{
+  "output": "MW-Letter-Example",
+  "credentials": "strip",
+  "date": "2026-11-10",
+  "ref": "MW-EXAMPLE-001",
+  "recipient": [
+    "The Recipient",
+    "Example Farm",
+    "Duns",
+    "TD11 0XX"
+  ],
+  "subject": "Example subject line",
+  "salutation": "Dear Sir/Madam,",
+  "body": [
+    "First paragraph of the letter. Inline **bold** is supported for the odd emphasis.",
+    "Second paragraph.",
+    "Closing paragraph with a direct contact number."
+  ],
+  "closing": "Many thanks,",
+  "signatory": {
+    "name": "Murray MacPherson",
+    "lines": ["Munro Wilson Ltd"]
+  },
+  "enclosures": ["Example enclosure"]
+}

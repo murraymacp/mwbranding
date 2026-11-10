@@ -30,6 +30,9 @@ reconstructed. Assets and source belong together, under version control.
 | `brand.js` | Document component module for `docx` |
 | `build-template.js` | Generates the blank document template |
 | `build-report.js` | Generates the brand identity report, and serves as the proving run |
+| `letterhead.js` | Letterhead and letter layout, built on `brand.js` |
+| `build-letter.js` | Builds a letter from a JSON spec, or a blank letterhead |
+| `examples/letter.example.json` | Letter spec showing every field |
 
 ## Usage
 
@@ -37,7 +40,38 @@ reconstructed. Assets and source belong together, under version control.
 npm install docx sharp
 node build-template.js      # -> MW-Document-Template.docx
 node build-report.js        # -> MW-Brand-Identity-Report.docx
+
+node build-letter.js letters/my-letter.json --pdf          # -> out/<output>.docx and .pdf
+node build-letter.js --blank --credentials strip --pdf     # -> out/MW-Letterhead.docx, to type into in Word
 ```
+
+## Letters
+
+`letters/` and `out/` are gitignored. This repo is public and letters carry
+client and commercial detail, so only the layout code lives here. Copy
+`examples/letter.example.json` into `letters/` and edit it.
+
+| Field | Notes |
+|---|---|
+| `credentials` | Required. `strip` (accreditation marks in the footer) or `none` |
+| `recipient` | Array of address lines |
+| `date` | `YYYY-MM-DD`, printed as 10 November 2026. Defaults to today |
+| `ref` | Optional "Our ref" line under the date |
+| `subject` | Optional bold navy line above the salutation |
+| `salutation` | Defaults to "Dear Sir/Madam," |
+| `body` | Array of paragraphs. `**bold**` supported |
+| `closing` | Defaults to "Yours faithfully," |
+| `signatory` | `{ "name": "...", "lines": ["title", "company"] }` |
+| `enclosures` | Optional array, listed as "Enc." after the signature |
+| `output` | File name without extension |
+
+Page one carries the full letterhead: logo left, services and contact right,
+navy rule, accreditation strip and statutory disclosure in the footer. If a
+letter runs over, later pages get a compact header with page numbering.
+`--pdf` reports the page count and warns when a letter passes one page.
+
+Letterhead contact details come from the `contact` block in `brand.json`;
+any null field is left off. Layout values are in the `letter` block.
 
 Assets are fetched from this repo's raw URLs at build time and cached in
 `/tmp`. Nothing is embedded in the source, so updating artwork here updates
@@ -85,6 +119,12 @@ roughly an eighth of every page to reference nobody reads in place.
 4. Body-sized text needs 4.5:1 contrast against its background.
 
 ## Outstanding
+
+- Letterhead shows "Duns, Scottish Borders" and the website only. Add a full
+  trading address, office phone and general email to `contact` in
+  `brand.json` when agreed.
+- `brand.js` names image sizes `heightPt`, but docx-js `ImageRun` sizes are
+  pixels at 96 dpi. The letter block uses `Px` names; brand.js still to align.
 
 - No reversed Munro Wilson wordmark. Grey `#A7A9AC` on navy `#1F5C8B` measures
   3.01:1, so the logo cannot currently sit on a navy panel.
